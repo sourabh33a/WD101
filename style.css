@@ -1,0 +1,98 @@
+/**
+* ! changing default styles of browser
+**/ 
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: sans-serif;
+    background-color: rgba(85, 85, 199, 0.962);
+}
+form{
+    max-width: 400px;
+    box-shadow:2px 2px 4px rgba(0,0,0,0.1);
+    padding: 40px;
+    border-radius: 10px;
+    margin:auto;
+    margin-top: 5%;
+    background-color: rgb(144, 144, 238);
+}
+.title{
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    text-align: center;
+
+}
+
+form  div  input{
+width: 100%;
+border-radius: 8px;
+height: 30px;
+border: 2px solid rgb(160, 158, 158);
+outline: none;
+padding: 0 10px;
+box-shadow:2px 2px 4px rgba(0,0,0,0.1);
+margin-bottom: 15px;
+background-color: rgb(198, 198, 248);
+}
+.button{
+text-align: center;
+margin-top: 20px;
+}
+form div button{
+padding: 10px;
+border-radius: 5px;
+border: .5px;
+font-weight: 600;
+}
+button:hover{
+    background-color:  rgb(198, 198, 248);
+    padding: 15px;
+    border-radius: 10px;
+    font-weight: 700;
+}
+
+.check{
+    text-align: center;
+    margin-top: 20px;
+}
+.check  input{
+    width: 20px;
+    height: 15px;
+    margin-left: 10px;
+}
+footer{
+    text-align: center;
+    margin-bottom: 20px;
+}
+#table-box{
+    margin :auto;
+    margin-top: 50px;
+    background-color: rgb(77, 132, 235);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: left;
+    border-radius:20px;
+    height: 200px;
+    width: 650px;
+    box-shadow: rgba(62, 172, 78, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+td,th{
+    padding-left: 10px;
+    width: 100px;
+    text-align: left;
+}
+
+
+
+
+
+/**
+* ! Style rules for for section
+**/ 
+

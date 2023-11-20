@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <div class="container">
+
+
+        <form id="form">
+            <div class="title">Registration form</div>
+            <!-- /**
+                ! user name Input here
+             **/-->
+            <div>
+                <label for="name">Name</label>
+                <input required type="text" name="name" id="name">
+                
+            </div>
+
+
+            <!-- /**
+                ! Email Input here
+             **/-->
+            <div>
+                <label for="Email">Email</label>
+                <input required type="email" name="email" id="email">
+                
+            </div>
+
+
+            <!-- /**
+                ! password Input here
+             **/-->
+            <div>
+                <label for="password">password</label>
+                <input required type="password" name="password" id="password">
+                
+            </div>
+
+
+
+            <!-- /** 
+            ! dob input here
+        **/ -->
+        <div>
+            <label for="dob"> dob</label>
+            <input required type="date" name="dob" id="dob">
+            
+        </div>
+
+
+        <!-- 
+            /**
+            ! accept terms
+            **/
+         -->
+<div class="check">
+    <label for="checkbox">accept terms</label>
+    <input required type="checkbox" name="checkbox" id="checkbox">
+</div>
+<div class="button" >
+    <button type="submit" id="submit">Submit</button>
+</div>
+        </form>
+    </div>
+    <footer>
+        <div id="table-box">
+            <h1>Entries</h1>
+            <table id="user-table">
+                <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>dob</th>
+                <th>accepted terms?</th>
+            </table>
+        </div>
+    </footer>
+</body>
+<script src="index.js"></script>
+</html>
