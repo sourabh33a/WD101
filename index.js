@@ -1,5 +1,6 @@
 let element = (id) => document.getElementById(id);
 
+let classes = (classes) => document.getElementsByClassName(classes);
 
 let user_entries = [];
 
@@ -17,7 +18,7 @@ user_entries = fillTable();
 let username = element("name"),
   email = element("email"),
   password = element("password"),
-  tc = element("checkbox"),
+  tc = element("tc"),
   dob = element("dob");
 
 
@@ -25,9 +26,11 @@ let form = element("form");
 
 function verify(elem,message,cnd){
     if(cnd){
+        elem.style.border = "2px solid red";
         elem.setCustomValidity(message);
         elem.reportValidity();
     }else{
+        elem.style.border = "2px solid green";
         elem.setCustomValidity('');
 
     }
@@ -62,10 +65,9 @@ dob.addEventListener("input", (e) => {
 
 
 function makeObject(){
-    let check = false;
-    if(tc.checked){
-        check = true;
-    }
+   
+        let check = true;
+    
     let obj = {
         name: username.value,
         email: email.value,
@@ -100,13 +102,11 @@ function displayTable(){
 }
 
 form.addEventListener("submit", (e) => {
-    let cond_agree= !tc.checked;
     e.preventDefault();
-    if (!cond_agree) {
         let obj = makeObject();
         user_entries.push(obj);
         localStorage.setItem("user_entries", JSON.stringify(user_entries));
-    }
+    
     displayTable();
 });
 window.onload = (event) => {
