@@ -1,22 +1,85 @@
-let userForm = document.getElementById("form");
-let table = document.getElementById("user-table");
-let dob = document.getElementById("dob");
-let email = document.getElementById("email");
+let element = (id) => document.getElementById(id);
+
+
+let user_entries = [];
+
+function fillTable(){
+    let obj = localStorage.getItem("user_entries");
+    if(obj){
+        user_entries = JSON.parse(obj);
+    }else{
+        user_entries = [];
+    }
+    return user_entries;
+}
+user_entries = fillTable();
+
+let username = element("name"),
+  email = element("email"),
+  password = element("password"),
+  tc = element("checkbox"),
+  dob = element("dob");
+
+
+let form = element("form");
+
+function verify(elem,message,cnd){
+    if(cnd){
+        elem.setCustomValidity(message);
+        elem.reportValidity();
+    }else{
+        elem.setCustomValidity('');
+
+    }
+}
+
+function checkDOB(){
+    let age = new Date().getFullYear() - new Date(dob.value).getFullYear();
+    if(age < 18 || age>55){
+        return false;
+    }else{
+        return true;
+    }
+}
+
 let message_email = "Email must be valid";
 
-const retrieveEntries = () =>{
-    let entries = localStorage.getItem("user-entries");
-    if (entries){
-        entries = JSON.parse(entries);
+let message_dob = "You age must be between 18 and 55 to continue";
+
+
+
+email.addEventListener("input", (e) => {
+    let cond_email = !(email.value.includes("@") && email.value.includes("."));
+    e.preventDefault();
+    verify(email,message_email,cond_email);
+});
+
+dob.addEventListener("input", (e) => {
+    let cond_dob = !checkDOB();
+    e.preventDefault();
+    verify(dob,message_dob,cond_dob);
+});
+
+
+function makeObject(){
+    let check = false;
+    if(tc.checked){
+        check = true;
     }
-    else{
-        entries=[];
+    let obj = {
+        name: username.value,
+        email: email.value,
+        password: password.value,
+        dob: dob.value,
+        checked: check
     }
-    return entries;
+    return obj;
 }
-let retrivedentries = retrieveEntries();
-const displayentries = () =>{
-    const entries = retrieveEntries();
+
+
+function displayTable(){
+    let table = element("user-table");
+    let entries = user_entries;
     let str = `<tr>
                     <th>Name</th>
                     <th>Email</th>
@@ -30,63 +93,22 @@ const displayentries = () =>{
                     <td>${entries[i].email}</td>
                     <td>${entries[i].password}</td>
                     <td>${entries[i].dob}</td>
-                    <td>${entries[i].checkbox}</td>
+                    <td>${entries[i].checked}</td>
                 </tr>\n`;
     }
     table.innerHTML = str;
 }
-let message_dob = "You age must be between 18 and 55 to continue";
-dob.addEventListener("input", (e) => {
-    let cond_dob = !checkDOB();
+
+form.addEventListener("submit", (e) => {
+    let cond_agree= !tc.checked;
     e.preventDefault();
-    verify(dob,message_dob,cond_dob);
-});
-function checkDOB(){
-    let age = new Date().getFullYear() - new Date(dob.value).getFullYear();
-    if(age < 18 || age>55){
-        return false;
-    }else{
-        return true;
+    if (!cond_agree) {
+        let obj = makeObject();
+        user_entries.push(obj);
+        localStorage.setItem("user_entries", JSON.stringify(user_entries));
     }
-}
-function verify(elem,message,cnd){
-    if(cnd){
-        elem.style.border = "2px solid red";
-        elem.setCustomValidity(message);
-        elem.reportValidity();
-    }else{
-        elem.style.border = "2px solid green";
-        elem.setCustomValidity('');
-
-    }
-}
-email.addEventListener("input", (e) => {
-    let cond_email = !(email.value.includes("@") && email.value.includes("."));
-    e.preventDefault();
-    verify(email,message_email,cond_email);
+    displayTable();
 });
-
-let userEntries = [];
-const saveuserform= (event) =>{
-    event.preventDefault();
-    const name = document.getElementById("name").value;
-    const Email= document.getElementById("email").value;
-    const password=document.getElementById("password").value;
-    const dob = document.getElementById("dob").value;
-
-    const checkbox=document.getElementById("checkbox").checked;
-
-    const entry = {
-        name:name,
-        Email:Email,
-        password:password,
-        dob:dob,
-        checkbox:checkbox
-    };
-    userEntries.push(entry);
-    localStorage.setItem("user-entries", JSON.stringify(userEntries));
-}
-userForm.addEventListener("submit",saveuserform);
 window.onload = (event) => {
-displayentries();
-}
+    displayTable();
+};
