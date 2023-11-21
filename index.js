@@ -1,7 +1,8 @@
 let userForm = document.getElementById("form");
 let table = document.getElementById("user-table");
 let dob = document.getElementById("dob");
-
+let email = document.getElementById("email");
+let message_email = "Email must be valid";
 
 const retrieveEntries = () =>{
     let entries = localStorage.getItem("user-entries");
@@ -59,6 +60,11 @@ function verify(elem,message,cnd){
 
     }
 }
+email.addEventListener("input", (e) => {
+    let cond_email = !(email.value.includes("@") && email.value.includes("."));
+    e.preventDefault();
+    verify(email,message_email,cond_email);
+});
 
 let userEntries = [];
 const saveuserform= (event) =>{
@@ -81,4 +87,6 @@ const saveuserform= (event) =>{
     localStorage.setItem("user-entries", JSON.stringify(userEntries));
 }
 userForm.addEventListener("submit",saveuserform);
-userForm.addEventListener("submit",displayentries);
+window.onload = (event) => {
+displayentries();
+}
